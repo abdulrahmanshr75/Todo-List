@@ -11,7 +11,7 @@
 
 ## Live link
 
-[Live Demo]( https://abdulrahmanshr75.github.io/Todo-List/)
+[Live Demo](https://abdulrahmanshr75.github.io/Todo-List/)
 
 ## Usage
 
