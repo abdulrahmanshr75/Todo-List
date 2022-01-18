@@ -40,13 +40,15 @@ you can run this website on live server port 8080 by this command
 npm run start
 
 ```
-
 to build the project run:
 
 ```
+
 npm run build
 
 ```
+
+
 ## Author
 
 👤 Abdulrahman Shrshar
