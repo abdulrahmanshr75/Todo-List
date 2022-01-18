@@ -5,6 +5,98 @@
 }
 
 body {
+  display: flex;
+  justify-content: center;
+  align-items: center;
   margin: 0;
-  background-color: bisque;
+  font-family: "Lato", sans-serif;
+}
+
+.main-container {
+  margin-top: 200px;
+  width: 450px;
+  box-shadow: 0 0 3px 3px rgba(0, 0, 0, 0.2);
+  flex-direction: column;
+}
+
+.italic-text {
+  position: relative;
+  margin-left: 20px;
+  font-style: italic;
+  font-size: 16px;
+  border: none;
+  outline: none;
+  color: #505050;
+  width: 395px;
+}
+
+.todos-container {
+  padding: 0;
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  flex-direction: column;
+  list-style: none;
+  margin: 0;
+}
+
+.new {
+  display: flex;
+  align-items: center;
+  border: 1px solid rgb(230, 230, 230);
+  width: 100%;
+  height: 40px;
+}
+
+.container {
+  width: 450px;
+  border: 1px solid rgb(230, 230, 230);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.todo-added {
+  border: none;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px;
+  outline: none;
+  font-size: 16px;
+  width: 375px;
+}
+
+.heading {
+  position: relative;
+  margin-left: 20px;
+}
+
+.drag {
+  cursor: move;
+}
+
+.check {
+  cursor: pointer;
+  margin-left: 12px;
+}
+
+.check:checked + .todo-added {
+  text-decoration: line-through;
+}
+
+.return {
+  font-size: 18px;
+  cursor: pointer;
+}
+
+.delete {
+  padding: 10px;
+  text-align: center;
+  background-color: rgb(230, 230, 230);
+  cursor: pointer;
+}
+
+.hide {
+  cursor: pointer;
 }
