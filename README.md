@@ -17,37 +17,22 @@
 
 start by cloning this repository by running:
 
-```
 git clone https://github.com/abdulrahmanshr75/Todo-List.git
-```
 
 cd into the folder
 
-```
-
 install all the packages needed by this command
-
-```
 
 npm install
 
-```
 
-you can run this website on live server port 8080 by this command
-
-```
+you can run this website on live server port 8080 by this command : 
 
 npm run start
 
-```
 to build the project run:
 
-```
-
 npm run build
-
-```
-
 
 ## Author
 
@@ -59,4 +44,5 @@ npm run build
 ## Show your support
 
 Give a ⭐️ if you like this project!
-```
+
+
