@@ -44,11 +44,9 @@ npm run start
 to build the project run:
 
 ```
-
 npm run build
 
 ```
-
 ## Author
 
 👤 Abdulrahman Shrshar
