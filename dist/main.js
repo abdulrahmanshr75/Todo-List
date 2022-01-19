@@ -350,7 +350,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_1___default()((_node_modules_css_loader_dist_runtime_noSourceMaps_js__WEBPACK_IMPORTED_MODULE_0___default()));
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "*,\r\n*::after,\r\n*::before {\r\n  box-sizing: border-box;\r\n}\r\n\r\nbody {\r\n  display: flex;\r\n  justify-content: center;\r\n  align-items: center;\r\n  margin: 0;\r\n  font-family: \"Lato\", sans-serif;\r\n}\r\n\r\n.delete {\r\n  float: right;\r\n  color: #777;\r\n  border: none;\r\n  background-color: transparent;\r\n  cursor: pointer;\r\n}\r\n\r\n.main-container {\r\n  margin-top: 200px;\r\n  width: 450px;\r\n  box-shadow: 0 0 3px 3px rgba(0, 0, 0, 0.2);\r\n  flex-direction: column;\r\n}\r\n\r\n.heading {\r\n  display: flex;\r\n  align-items: center;\r\n  justify-content: space-between;\r\n  width: 430px;\r\n}\r\n\r\n.todays {\r\n  margin-left: 8px;\r\n}\r\n\r\n.todo-form {\r\n  display: flex;\r\n  border: 1px solid rgb(230, 230, 230);\r\n  height: 48px;\r\n}\r\n\r\n.italic-text {\r\n  position: relative;\r\n  margin-left: 8px;\r\n  font-style: italic;\r\n  font-size: 16px;\r\n  border: none;\r\n  outline: none;\r\n  color: #505050;\r\n  width: 395px;\r\n}\r\n\r\n.check:checked + .text-lined {\r\n  text-decoration: line-through;\r\n}\r\n\r\n.todo-added {\r\n  display: flex;\r\n  border: 1px solid rgb(230, 230, 230);\r\n  justify-content: space-between;\r\n  align-items: center;\r\n  padding: 10px;\r\n  outline: none;\r\n  font-size: 16px;\r\n  width: 450px;\r\n  height: 48px;\r\n}\r\n\r\n.clear {\r\n  padding: 10px;\r\n  text-align: center;\r\n  background-color: rgb(230, 230, 230);\r\n  cursor: pointer;\r\n}\r\n\r\nul {\r\n  margin: 0;\r\n  padding: 0;\r\n}\r\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "*,\r\n*::after,\r\n*::before {\r\n  box-sizing: border-box;\r\n}\r\n\r\nbody {\r\n  display: flex;\r\n  justify-content: center;\r\n  align-items: center;\r\n  margin: 0;\r\n  font-family: \"Lato\", sans-serif;\r\n}\r\n\r\n.delete {\r\n  float: right;\r\n  color: #777;\r\n  border: none;\r\n  background-color: transparent;\r\n  cursor: pointer;\r\n}\r\n\r\n.main-container {\r\n  margin-top: 200px;\r\n  width: 450px;\r\n  box-shadow: 0 0 3px 3px rgba(0, 0, 0, 0.2);\r\n  flex-direction: column;\r\n}\r\n\r\n.heading {\r\n  display: flex;\r\n  align-items: center;\r\n  justify-content: space-between;\r\n  width: 430px;\r\n}\r\n\r\n.todays {\r\n  margin-left: 8px;\r\n}\r\n\r\n.todo-form {\r\n  display: flex;\r\n  border: 1px solid rgb(230, 230, 230);\r\n  height: 48px;\r\n}\r\n\r\n.italic-text {\r\n  position: relative;\r\n  margin-left: 8px;\r\n  font-style: italic;\r\n  font-size: 16px;\r\n  border: none;\r\n  outline: none;\r\n  color: #505050;\r\n  width: 395px;\r\n}\r\n\r\n.check:checked + .text-lined {\r\n  text-decoration: line-through;\r\n}\r\n\r\n.todo-added {\r\n  display: flex;\r\n  border: 1px solid rgb(230, 230, 230);\r\n  justify-content: space-between;\r\n  align-items: center;\r\n  padding: 10px;\r\n  outline: none;\r\n  font-size: 16px;\r\n  width: 450px;\r\n  height: 48px;\r\n}\r\n\r\n.clear {\r\n  padding: 10px;\r\n  text-align: center;\r\n  background-color: rgb(230, 230, 230);\r\n  cursor: pointer;\r\n}\r\n\r\n.fa-ellipsis-v {\r\n  cursor: move;\r\n}\r\n\r\nul {\r\n  margin: 0;\r\n  padding: 0;\r\n}\r\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -489,10 +489,10 @@ const createTodo = (description) => {
   const index = todos.length + 1;
   const completed = false;
   todos.push({ description, completed, index });
-  localStorage.setItem("todos", JSON.stringify(todos));
+  localStorage.setItem('todos', JSON.stringify(todos));
 };
 
-const adjustIndex = () => {
+const editTheIndex = () => {
   let n = 0;
   todos.forEach((item) => {
     n += 1;
@@ -502,13 +502,13 @@ const adjustIndex = () => {
 
 const deleteTodo = (index) => {
   todos = todos.filter((item) => Number(index) !== item.index);
-  adjustIndex();
-  localStorage.setItem("todos", JSON.stringify(todos));
+  editTheIndex();
+  localStorage.setItem('todos', JSON.stringify(todos));
 };
 
 const getFromLocalStorage = () => {
-  if (localStorage.getItem("todos")) {
-    todos = JSON.parse(localStorage.getItem("todos"));
+  if (localStorage.getItem('todos')) {
+    todos = JSON.parse(localStorage.getItem('todos'));
   }
   return todos;
 };
@@ -516,7 +516,7 @@ const getFromLocalStorage = () => {
 const updateTodo = (index, description) => {
   const todo = todos.find((item) => Number(index) === item.index);
   todo.description = description;
-  localStorage.setItem("todos", JSON.stringify(todos));
+  localStorage.setItem('todos', JSON.stringify(todos));
 };
 
 
@@ -601,7 +601,7 @@ __webpack_require__.r(__webpack_exports__);
 const displayTodo = (todo) => `<li class="todo-added">
                     <div>
                     <input class="check" type="checkbox" value="index"/>
-                     <span class="text-lined" data-index="${todo.index}" contentEditable="true"> ${todo.description} </span>
+                     <span class="text-lined" data-index="${todo.index}"contentEditable="true">  ${todo.description} </span>
                      </div>
                      <div>
                      <i class="fas fa-ellipsis-v"></i>
@@ -628,35 +628,35 @@ const block = () => `<section class="main-container">
         </div>
     </section>`;
 
-const main = document.querySelector("main");
+const main = document.querySelector('main');
 main.innerHTML = block();
 
-const todos = document.querySelector(".todos");
+const todos = document.querySelector('.todos');
 const todoComponent = () => {
-  todos.innerHTML = "";
+  todos.innerHTML = '';
   (0,_crud_js__WEBPACK_IMPORTED_MODULE_1__.getFromLocalStorage)().forEach((item) => {
     todos.innerHTML += displayTodo(item);
   });
-  const remove = document.querySelectorAll(".delete");
+  const remove = document.querySelectorAll('.delete');
   remove.forEach((item) => {
-    item.addEventListener("click", () => {
-      (0,_crud_js__WEBPACK_IMPORTED_MODULE_1__.deleteTodo)(item.getAttribute("value"));
+    item.addEventListener('click', () => {
+      (0,_crud_js__WEBPACK_IMPORTED_MODULE_1__.deleteTodo)(item.getAttribute('value'));
       todoComponent();
     });
   });
 
-  const textLined = document.querySelectorAll(".text-lined");
+  const textLined = document.querySelectorAll('.text-lined');
   textLined.forEach((item) => {
-    item.addEventListener("input", () => {
-      (0,_crud_js__WEBPACK_IMPORTED_MODULE_1__.updateTodo)(item.getAttribute("data-index"), item.innerHTML);
+    item.addEventListener('input', () => {
+      (0,_crud_js__WEBPACK_IMPORTED_MODULE_1__.updateTodo)(item.getAttribute('data-index'), item.innerHTML);
     });
   });
 };
 
 todoComponent();
 
-const form = document.querySelector(".todo-form");
-form.addEventListener("submit", (e) => {
+const form = document.querySelector('.todo-form');
+form.addEventListener('submit', (e) => {
   e.preventDefault();
   (0,_crud_js__WEBPACK_IMPORTED_MODULE_1__.createTodo)(form.elements.description.value);
   form.reset();

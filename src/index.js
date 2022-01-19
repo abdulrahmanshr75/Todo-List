@@ -1,10 +1,10 @@
-import "./style.css";
+import './style.css';
 import {
   getFromLocalStorage,
   createTodo,
   deleteTodo,
   updateTodo,
-} from "./crud.js";
+} from './crud.js';
 
 const displayTodo = (todo) => `<li class="todo-added">
                     <div>
@@ -36,35 +36,35 @@ const block = () => `<section class="main-container">
         </div>
     </section>`;
 
-const main = document.querySelector("main");
+const main = document.querySelector('main');
 main.innerHTML = block();
 
-const todos = document.querySelector(".todos");
+const todos = document.querySelector('.todos');
 const todoComponent = () => {
-  todos.innerHTML = "";
+  todos.innerHTML = '';
   getFromLocalStorage().forEach((item) => {
     todos.innerHTML += displayTodo(item);
   });
-  const remove = document.querySelectorAll(".delete");
+  const remove = document.querySelectorAll('.delete');
   remove.forEach((item) => {
-    item.addEventListener("click", () => {
-      deleteTodo(item.getAttribute("value"));
+    item.addEventListener('click', () => {
+      deleteTodo(item.getAttribute('value'));
       todoComponent();
     });
   });
 
-  const textLined = document.querySelectorAll(".text-lined");
+  const textLined = document.querySelectorAll('.text-lined');
   textLined.forEach((item) => {
-    item.addEventListener("input", () => {
-      updateTodo(item.getAttribute("data-index"), item.innerHTML);
+    item.addEventListener('input', () => {
+      updateTodo(item.getAttribute('data-index'), item.innerHTML);
     });
   });
 };
 
 todoComponent();
 
-const form = document.querySelector(".todo-form");
-form.addEventListener("submit", (e) => {
+const form = document.querySelector('.todo-form');
+form.addEventListener('submit', (e) => {
   e.preventDefault();
   createTodo(form.elements.description.value);
   form.reset();
