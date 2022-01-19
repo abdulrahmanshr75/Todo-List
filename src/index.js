@@ -1,46 +1,72 @@
-import 'material-icons/iconfont/material-icons.css';
-import './style.css';
+import "./style.css";
+import {
+  getFromLocalStorage,
+  createTodo,
+  deleteTodo,
+  updateTodo,
+} from "./crud.js";
 
-const todoList = document.querySelector('.todos-container');
+const displayTodo = (todo) => `<li class="todo-added">
+                    <div>
+                    <input class="check" type="checkbox" value="index"/>
+                     <span class="text-lined" data-index="${todo.index}"contentEditable="true">  ${todo.description} </span>
+                     </div>
+                     <div>
+                     <i class="fas fa-ellipsis-v"></i>
+                    <button class="delete" value="${todo.index}">
+                       <i class="fa fa-trash"></i>
+                    </button>
+                    </div>
+                </li>`;
 
-const todos = [
-  {
-    index: 0,
-    description: 'go to doctor',
-    completed: false,
-  },
-  {
-    index: 1,
-    description: 'buy grocery',
-    completed: true,
-  },
-  {
-    index: 2,
-    description: 'walk the dog',
-    completed: false,
-  },
-];
-
-const render = () => {
-  todoList.innerHTML = '';
-
-  todos
-    .sort((a, z) => a.index - z.index)
-    .forEach((todo) => {
-      todoList.innerHTML += `
-      <li>
-        <div class="container">
-          <input class="check" type="checkbox" ${
-  todo.completed ? 'checked' : ''
-}/>
-          <input class="todo-added" type="text" value='${
-  todo.description
-}' edit  />
-          <span class="material-icons drag">more_vert</span>
+const block = () => `<section class="main-container">
+        <div>
+            <div class="heading">
+                <h2 class="todays"> Today's To Do</h2>
+                <span><i class="fas fa-sync-alt"></i></span>
+            </div>
+                <form class="todo-form">
+                    <input class="italic-text" name="description" type="text" placeholder="Add to your list"/>
+                </form>
+            <ul class="todos">
+            </ul>
+            <div class="clear">
+                <a > Clear all completed </a>
+            </div>
         </div>
-      </li>
-      `;
+    </section>`;
+
+const main = document.querySelector("main");
+main.innerHTML = block();
+
+const todos = document.querySelector(".todos");
+const todoComponent = () => {
+  todos.innerHTML = "";
+  getFromLocalStorage().forEach((item) => {
+    todos.innerHTML += displayTodo(item);
+  });
+  const remove = document.querySelectorAll(".delete");
+  remove.forEach((item) => {
+    item.addEventListener("click", () => {
+      deleteTodo(item.getAttribute("value"));
+      todoComponent();
     });
+  });
+
+  const textLined = document.querySelectorAll(".text-lined");
+  textLined.forEach((item) => {
+    item.addEventListener("input", () => {
+      updateTodo(item.getAttribute("data-index"), item.innerHTML);
+    });
+  });
 };
 
-render();
+todoComponent();
+
+const form = document.querySelector(".todo-form");
+form.addEventListener("submit", (e) => {
+  e.preventDefault();
+  createTodo(form.elements.description.value);
+  form.reset();
+  todoComponent();
+});
