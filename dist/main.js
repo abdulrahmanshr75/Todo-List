@@ -483,14 +483,14 @@ __webpack_require__.r(__webpack_exports__);
 class Todo {
   todos = [];
 
-  addTodo = (description) => {
+  createTodo = (description) => {
     const index = this.todos.length + 1;
     const completed = false;
     this.todos.push({ description, completed, index });
     localStorage.setItem("todos", JSON.stringify(this.todos));
   };
 
-  adjustIndex = () => {
+  editTheIndex = () => {
     let n = 0;
     this.todos.forEach((item) => {
       n += 1;
@@ -498,28 +498,28 @@ class Todo {
     });
   };
 
-  removeTodo = (index) => {
+  deleteTodo = (index) => {
     this.todos = this.todos.filter((item) => Number(index) !== item.index);
-    this.adjustIndex();
+    this.editTheIndex();
     localStorage.setItem("todos", JSON.stringify(this.todos));
   };
 
-  getAllTodos = () => {
+  getFromLocalStorage = () => {
     if (localStorage.getItem("todos")) {
       this.todos = JSON.parse(localStorage.getItem("todos"));
     }
     return this.todos;
   };
 
-  editTodo = (index, description) => {
+  updateTodo = (index, description) => {
     const todo = this.todos.find((item) => Number(index) === item.index);
     todo.description = description;
     localStorage.setItem("todos", JSON.stringify(this.todos));
   };
 
-  clearAllCompleted = () => {
+  done = () => {
     const uncompleted = this.todos.filter((item) => item.completed !== true);
-    this.adjustIndex();
+    this.editTheIndex();
     localStorage.setItem("todos", JSON.stringify(uncompleted));
   };
 
@@ -531,6 +531,18 @@ class Todo {
       todo.completed = true;
     }
     localStorage.setItem("todos", JSON.stringify(this.todos));
+  };
+
+  checkingTodo = () => {
+    const checkbox = document.querySelectorAll(".check");
+    checkbox.forEach((item) => {
+      if (item.checked === true) {
+        item.completed = false;
+      } else {
+        item.completed = true;
+      }
+      localStorage.setItem("todos", JSON.stringify(this.checkbox));
+    });
   };
 }
 
@@ -614,9 +626,9 @@ __webpack_require__.r(__webpack_exports__);
 
 
 const todo = new _crud_js__WEBPACK_IMPORTED_MODULE_1__["default"]();
-const displayTodo = (todo) => `<li class="todo-added">
+const displayTodo = (todo, checked) => `<li class="todo-added">
                     <div>
-                    <input class="check" type="checkbox" value="${todo.index}"/>
+                    <input ${checked} class="check" type="checkbox" value="${todo.index}"/>
                      <span class="text-lined" data-index="${todo.index}" contentEditable="true"> ${todo.description} </span>
                      </div>
                      <div>
@@ -644,19 +656,23 @@ const block = () => `<section class="main-container">
         </div>
     </section>`;
 
+const ischecked = (item) => {
+  if (item === true) return "checked";
+};
+
 const main = document.querySelector("main");
 main.innerHTML = block();
 
 const todos = document.querySelector(".todos");
 const structure = () => {
   todos.innerHTML = "";
-  todo.getAllTodos().forEach((item) => {
-    todos.innerHTML += displayTodo(item);
+  todo.getFromLocalStorage().forEach((item) => {
+    todos.innerHTML += displayTodo(item, ischecked(item.completed));
   });
   const deleteTodo = document.querySelectorAll(".delete");
   deleteTodo.forEach((item) => {
     item.addEventListener("click", () => {
-      todo.removeTodo(item.getAttribute("value"));
+      todo.deleteTodo(item.getAttribute("value"));
       structure();
     });
   });
@@ -664,7 +680,7 @@ const structure = () => {
   const textLined = document.querySelectorAll(".text-lined");
   textLined.forEach((item) => {
     item.addEventListener("input", () => {
-      todo.editTodo(item.getAttribute("data-index"), item.innerHTML);
+      todo.updateTodo(item.getAttribute("data-index"), item.innerHTML);
     });
   });
 
@@ -689,7 +705,7 @@ form.addEventListener("submit", (e) => {
 const completed = document.querySelector(".clear");
 completed.addEventListener("click", (e) => {
   e.preventDefault();
-  todo.clearAllCompleted();
+  todo.done();
   structure();
 });
 
