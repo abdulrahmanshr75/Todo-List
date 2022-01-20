@@ -5,7 +5,7 @@ export default class Todo {
     const index = this.todos.length + 1;
     const completed = false;
     this.todos.push({ description, completed, index });
-    localStorage.setItem("todos", JSON.stringify(this.todos));
+    localStorage.setItem('todos', JSON.stringify(this.todos));
   };
 
   editTheIndex = () => {
@@ -19,12 +19,12 @@ export default class Todo {
   deleteTodo = (index) => {
     this.todos = this.todos.filter((item) => Number(index) !== item.index);
     this.editTheIndex();
-    localStorage.setItem("todos", JSON.stringify(this.todos));
+    localStorage.setItem('todos', JSON.stringify(this.todos));
   };
 
   getFromLocalStorage = () => {
-    if (localStorage.getItem("todos")) {
-      this.todos = JSON.parse(localStorage.getItem("todos"));
+    if (localStorage.getItem('todos')) {
+      this.todos = JSON.parse(localStorage.getItem('todos'));
     }
     return this.todos;
   };
@@ -32,13 +32,13 @@ export default class Todo {
   updateTodo = (index, description) => {
     const todo = this.todos.find((item) => Number(index) === item.index);
     todo.description = description;
-    localStorage.setItem("todos", JSON.stringify(this.todos));
+    localStorage.setItem('todos', JSON.stringify(this.todos));
   };
 
   done = () => {
     const uncompleted = this.todos.filter((item) => item.completed !== true);
     this.editTheIndex();
-    localStorage.setItem("todos", JSON.stringify(uncompleted));
+    localStorage.setItem('todos', JSON.stringify(uncompleted));
   };
 
   isCompleted = (index) => {
@@ -48,18 +48,18 @@ export default class Todo {
     } else {
       todo.completed = true;
     }
-    localStorage.setItem("todos", JSON.stringify(this.todos));
+    localStorage.setItem('todos', JSON.stringify(this.todos));
   };
 
   checkingTodo = () => {
-    const checkbox = document.querySelectorAll(".check");
+    const checkbox = document.querySelectorAll('.check');
     checkbox.forEach((item) => {
       if (item.checked === true) {
         item.completed = false;
       } else {
         item.completed = true;
       }
-      localStorage.setItem("todos", JSON.stringify(this.checkbox));
+      localStorage.setItem('todos', JSON.stringify(this.checkbox));
     });
   };
 }

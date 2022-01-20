@@ -1,5 +1,5 @@
-import "./style.css";
-import Todo from "./crud.js";
+import './style.css';
+import Todo from './crud.js';
 
 const todo = new Todo();
 const displayTodo = (todo, checked) => `<li class="todo-added">
@@ -33,36 +33,36 @@ const block = () => `<section class="main-container">
     </section>`;
 
 const ischecked = (item) => {
-  if (item === true) return "checked";
+  if (item === true) return 'checked';
 };
 
-const main = document.querySelector("main");
+const main = document.querySelector('main');
 main.innerHTML = block();
 
-const todos = document.querySelector(".todos");
+const todos = document.querySelector('.todos');
 const structure = () => {
-  todos.innerHTML = "";
+  todos.innerHTML = '';
   todo.getFromLocalStorage().forEach((item) => {
     todos.innerHTML += displayTodo(item, ischecked(item.completed));
   });
-  const deleteTodo = document.querySelectorAll(".delete");
+  const deleteTodo = document.querySelectorAll('.delete');
   deleteTodo.forEach((item) => {
-    item.addEventListener("click", () => {
-      todo.deleteTodo(item.getAttribute("value"));
+    item.addEventListener('click', () => {
+      todo.deleteTodo(item.getAttribute('value'));
       structure();
     });
   });
 
-  const textLined = document.querySelectorAll(".text-lined");
+  const textLined = document.querySelectorAll('.text-lined');
   textLined.forEach((item) => {
-    item.addEventListener("input", () => {
-      todo.updateTodo(item.getAttribute("data-index"), item.innerHTML);
+    item.addEventListener('input', () => {
+      todo.updateTodo(item.getAttribute('data-index'), item.innerHTML);
     });
   });
 
-  const select = document.querySelectorAll(".check");
+  const select = document.querySelectorAll('.check');
   select.forEach((item) => {
-    item.addEventListener("change", () => {
+    item.addEventListener('change', () => {
       todo.isCompleted(item.value);
     });
   });
@@ -70,16 +70,16 @@ const structure = () => {
 
 structure();
 
-const form = document.querySelector(".todo-form");
-form.addEventListener("submit", (e) => {
+const form = document.querySelector('.todo-form');
+form.addEventListener('submit', (e) => {
   e.preventDefault();
   todo.createTodo(form.elements.description.value);
   form.reset();
   structure();
 });
 
-const completed = document.querySelector(".clear");
-completed.addEventListener("click", (e) => {
+const completed = document.querySelector('.clear');
+completed.addEventListener('click', (e) => {
   e.preventDefault();
   todo.done();
   structure();
