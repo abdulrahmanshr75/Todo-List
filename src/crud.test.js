@@ -16,3 +16,11 @@ describe("Create Todo", () => {
     expect(todo.todos.length).toBe(3);
   });
 });
+
+describe("deleteTodo", () => {
+  it("remove todo", () => {
+    const index = 1;
+    todo.deleteTodo(index);
+    expect(todo.todos.length).toBe(2);
+  });
+});  
