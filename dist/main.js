@@ -487,7 +487,7 @@ class Todo {
     const index = this.todos.length + 1;
     const completed = false;
     this.todos.push({ description, completed, index });
-    localStorage.setItem("todos", JSON.stringify(this.todos));
+    localStorage.setItem('todos', JSON.stringify(this.todos));
   };
 
   editTheIndex = () => {
@@ -501,12 +501,12 @@ class Todo {
   deleteTodo = (index) => {
     this.todos = this.todos.filter((item) => Number(index) !== item.index);
     this.editTheIndex();
-    localStorage.setItem("todos", JSON.stringify(this.todos));
+    localStorage.setItem('todos', JSON.stringify(this.todos));
   };
 
   getFromLocalStorage = () => {
-    if (localStorage.getItem("todos")) {
-      this.todos = JSON.parse(localStorage.getItem("todos"));
+    if (localStorage.getItem('todos')) {
+      this.todos = JSON.parse(localStorage.getItem('todos'));
     }
     return this.todos;
   };
@@ -514,13 +514,13 @@ class Todo {
   updateTodo = (index, description) => {
     const todo = this.todos.find((item) => Number(index) === item.index);
     todo.description = description;
-    localStorage.setItem("todos", JSON.stringify(this.todos));
+    localStorage.setItem('todos', JSON.stringify(this.todos));
   };
 
   done = () => {
     const uncompleted = this.todos.filter((item) => item.completed !== true);
     this.editTheIndex();
-    localStorage.setItem("todos", JSON.stringify(uncompleted));
+    localStorage.setItem('todos', JSON.stringify(uncompleted));
   };
 
   isCompleted = (index) => {
@@ -530,18 +530,18 @@ class Todo {
     } else {
       todo.completed = true;
     }
-    localStorage.setItem("todos", JSON.stringify(this.todos));
+    localStorage.setItem('todos', JSON.stringify(this.todos));
   };
 
   checkingTodo = () => {
-    const checkbox = document.querySelectorAll(".check");
+    const checkbox = document.querySelectorAll('.check');
     checkbox.forEach((item) => {
       if (item.checked === true) {
         item.completed = false;
       } else {
         item.completed = true;
       }
-      localStorage.setItem("todos", JSON.stringify(this.checkbox));
+      localStorage.setItem('todos', JSON.stringify(this.checkbox));
     });
   };
 }
@@ -657,36 +657,36 @@ const block = () => `<section class="main-container">
     </section>`;
 
 const ischecked = (item) => {
-  if (item === true) return "checked";
+  if (item === true) return 'checked';
 };
 
-const main = document.querySelector("main");
+const main = document.querySelector('main');
 main.innerHTML = block();
 
-const todos = document.querySelector(".todos");
+const todos = document.querySelector('.todos');
 const structure = () => {
-  todos.innerHTML = "";
+  todos.innerHTML = '';
   todo.getFromLocalStorage().forEach((item) => {
     todos.innerHTML += displayTodo(item, ischecked(item.completed));
   });
-  const deleteTodo = document.querySelectorAll(".delete");
+  const deleteTodo = document.querySelectorAll('.delete');
   deleteTodo.forEach((item) => {
-    item.addEventListener("click", () => {
-      todo.deleteTodo(item.getAttribute("value"));
+    item.addEventListener('click', () => {
+      todo.deleteTodo(item.getAttribute('value'));
       structure();
     });
   });
 
-  const textLined = document.querySelectorAll(".text-lined");
+  const textLined = document.querySelectorAll('.text-lined');
   textLined.forEach((item) => {
-    item.addEventListener("input", () => {
-      todo.updateTodo(item.getAttribute("data-index"), item.innerHTML);
+    item.addEventListener('input', () => {
+      todo.updateTodo(item.getAttribute('data-index'), item.innerHTML);
     });
   });
 
-  const select = document.querySelectorAll(".check");
+  const select = document.querySelectorAll('.check');
   select.forEach((item) => {
-    item.addEventListener("change", () => {
+    item.addEventListener('change', () => {
       todo.isCompleted(item.value);
     });
   });
@@ -694,16 +694,16 @@ const structure = () => {
 
 structure();
 
-const form = document.querySelector(".todo-form");
-form.addEventListener("submit", (e) => {
+const form = document.querySelector('.todo-form');
+form.addEventListener('submit', (e) => {
   e.preventDefault();
   todo.createTodo(form.elements.description.value);
   form.reset();
   structure();
 });
 
-const completed = document.querySelector(".clear");
-completed.addEventListener("click", (e) => {
+const completed = document.querySelector('.clear');
+completed.addEventListener('click', (e) => {
   e.preventDefault();
   todo.done();
   structure();
