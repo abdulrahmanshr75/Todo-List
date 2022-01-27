@@ -92,7 +92,7 @@ describe("DOM manipulation", () => {
     todo.todos.forEach((item) => {
       todos.innerHTML += displayTodo(item);
     });
-    const list = document.querySelector(".todos");
+    const list = document.querySelectorAll(".todos");
     expect(list).toHaveLength(1);
   });
 });
