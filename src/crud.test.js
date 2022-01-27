@@ -73,3 +73,28 @@ describe("Edit Todo", () => {
     ).toMatch("false");
   });
 });
+
+describe("Clear all todos", () => {
+  test("It should clear all the todos", () => {
+    todo.done();
+    expect(todo.todos.length).toBe(2);
+  });
+});
+describe("DOM manipulation", () => {
+  test("Display the main container", () => {
+    document.body.innerHTML = "<main></main>";
+    const main = document.querySelector("main");
+    main.innerHTML = block();
+    expect(document.querySelectorAll(".main-container").length).toBe(1);
+  });
+  test("Display the todo component", () => {
+    document.body.innerHTML = '<ul class="todos"></ul>';
+    const todos = document.querySelectorAll(".todos");
+    todo.todos.forEach((item) => {
+      todos.innerHTML += displayTodo(item);
+    });
+    const list = document.querySelectorAll(".todos");
+    expect(list).toHaveLength(1);
+  });
+});
+
