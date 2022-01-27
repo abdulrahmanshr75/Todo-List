@@ -1,7 +1,8 @@
 /** * @jest-environment jsdom */
 import Todo from "./crud.js";
-jest.mock("./localStorageMock.js");
+import { block, displayTodo } from "./domMock.js";
 
+jest.mock("./localStorageMock.js");
 const todo = new Todo();
 describe("Create Todo", () => {
   test("creating todo", () => {
@@ -19,7 +20,7 @@ describe("Create Todo", () => {
 });
 
 describe("deleteTodo", () => {
-  it("remove todo", () => {
+  test("remove todo", () => {
     const index = 1;
     todo.deleteTodo(index);
     expect(todo.todos.length).toBe(2);
@@ -28,7 +29,7 @@ describe("deleteTodo", () => {
 /* testing part 2 */
 describe("Edit Todo", () => {
   const index = 1;
-  it("Changing the text from 'Todo-2' to 'Hello-World'", () => {
+  test("Changing the text from 'Todo-2' to 'Hello-World'", () => {
     todo.updateTodo(index, "Hello-World");
     expect(
       todo.todos
@@ -41,7 +42,7 @@ describe("Edit Todo", () => {
         .join("")
     ).toBe("Hello-World");
   });
-  it("It should change the status from false to true", () => {
+  test("It should change the status from false to true", () => {
     const index = 1;
     todo.isCompleted(index);
     expect(
@@ -55,7 +56,7 @@ describe("Edit Todo", () => {
         .join("")
     ).toBeTruthy();
   });
-  it("It should change the status from true to false", () => {
+  test("It should change the status from true to false", () => {
     const index = 1;
     todo.isCompleted(index);
     expect(
@@ -72,8 +73,26 @@ describe("Edit Todo", () => {
 });
 
 describe("Clear all todos", () => {
-  it("It should clear all the todos", () => {
+  test("It should clear all the todos", () => {
     todo.done();
     expect(todo.todos.length).toBe(2);
+  });
+});
+
+describe("DOM manipulation", () => {
+  test("Display the main container", () => {
+    document.body.innerHTML = "<main></main>";
+    const main = document.querySelector("main");
+    main.innerHTML = block();
+    expect(document.querySelectorAll(".main-container").length).toBe(1);
+  });
+  test("Display the todo component", () => {
+    document.body.innerHTML = '<ul class="todos"></ul>';
+    const todos = document.querySelectorAll(".todos");
+    todo.todos.forEach((item) => {
+      todos.innerHTML += displayTodo(item);
+    });
+    const list = document.querySelector(".todos");
+    expect(list).toHaveLength(1);
   });
 });
