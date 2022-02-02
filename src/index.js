@@ -2,7 +2,7 @@ import './style.css';
 import Todo from './crud.js';
 
 const todo = new Todo();
-const displayTodo = (todo, checked) => `<li class="todo-added">
+export const displayTodo = (todo, checked) => `<li class="todo-added">
                     <div>
                     <input ${checked} class="check" type="checkbox" value="${todo.index}"/>
                      <span class="text-lined" data-index="${todo.index}" contentEditable="true"> ${todo.description} </span>
@@ -15,7 +15,7 @@ const displayTodo = (todo, checked) => `<li class="todo-added">
                     </div>
                 </li>`;
 
-const block = () => `<section class="main-container">
+export const block = () => `<section class="main-container">
         <div>
             <div class="heading">
                 <h2 class="todays"> Today's To Do</h2>
@@ -40,7 +40,7 @@ const main = document.querySelector('main');
 main.innerHTML = block();
 
 const todos = document.querySelector('.todos');
-const structure = () => {
+export const structure = () => {
   todos.innerHTML = '';
   todo.getFromLocalStorage().forEach((item) => {
     todos.innerHTML += displayTodo(item, ischecked(item.completed));
